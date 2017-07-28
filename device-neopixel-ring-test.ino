@@ -1,53 +1,27 @@
+//*** NeoPixel ***//
+// https://github.com/adafruit/Adafruit_NeoPixel/blob/master/examples/simple/simple.ino
 // NeoPixel Ring simple sketch (c) 2013 Shae Erisson
 // released under the GPLv3 license to match the rest of the AdaFruit NeoPixel library
 
 #include <Adafruit_NeoPixel.h>
-#ifdef __AVR__
-  #include <avr/power.h>
-#endif
 
-// Which pin on the Arduino is connected to the NeoPixels?
-// On a Trinket or Gemma we suggest changing this to 1
-#define PIN            PIN_D7
+#define PIXPIN	PIN_D7
+#define LED	11
+#define PIXELS	16
 
-int ledPin = 11;
-
-// How many NeoPixels are attached to the Arduino?
-#define NUMPIXELS      16
-
-// When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
-// Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest
-// example for more information on possible values.
-Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(PIXELS, PIXPIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
-  pinMode(PIN, OUTPUT);
+  pinMode(PIXPIN, OUTPUT);
   
-  pixels.begin(); // This initializes the NeoPixel library.
+  pixels.begin();
 
-  // flash to indicate startup
-  pinMode(ledPin, OUTPUT);
-  digitalWrite(ledPin, HIGH);
-  delay(250);
-  digitalWrite(ledPin, LOW);
-  delay(250);
-  digitalWrite(ledPin, HIGH);
-  delay(250);
-  digitalWrite(ledPin, LOW);
-  delay(250);
-  digitalWrite(ledPin, HIGH);
-
-  // flash to indicate startup
-  /*pinMode(PIN, OUTPUT);
-  digitalWrite(PIN, HIGH);
-  delay(250);
-  digitalWrite(PIN, LOW);
-  delay(250);
-  digitalWrite(PIN, HIGH);
-  delay(250);
-  digitalWrite(PIN, LOW);
-  delay(250);
-  digitalWrite(PIN, HIGH);*/
+  // flash LED to indicate startup
+  pinMode(LED, OUTPUT);
+  for (int i=0; i<6; i++) {  
+    digitalWrite(LED, i%2 ? HIGH : LOW);
+    delay(250);
+  }
 }
 
 int i = 0;
