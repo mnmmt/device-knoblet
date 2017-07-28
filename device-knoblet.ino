@@ -37,8 +37,6 @@ void setup() {
   }
 }
 
-int light[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
-
 void loop() {
   value = enc_one.read();
   
